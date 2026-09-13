@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Details - CollegeEats</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #ff5722;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            color: #222;
+        }
+
+        .page-title p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+        /* ORDER INFO */
+
+        .order-info {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-box {
+            background: #fff7f3;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #ffe0d6;
+        }
+
+        .info-label {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .info-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        /* STATUS */
+
+        .status {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            background: #fff3e0;
+            color: #e65100;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* ITEMS */
+
+        .items-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .items-card h2 {
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .item {
+            display: grid;
+            grid-template-columns: 1fr 100px 120px;
+            gap: 15px;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .food-name {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .item-price {
+            color: #777;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .quantity {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .subtotal {
+            text-align: right;
+            color: #ff5722;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* TOTAL */
+
+        .total-section {
+            border-top: 2px solid #eee;
+            margin-top: 10px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .total-label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .total {
+            color: #ff5722;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .primary-btn {
+            background: #ff5722;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #e64a19;
+        }
+
+        .secondary-btn {
+            background: #eee;
+            color: #333;
+        }
+
+        .secondary-btn:hover {
+            background: #ddd;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            background: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .quantity {
+                text-align: left;
+            }
+
+            .subtotal {
+                text-align: left;
+            }
+
+            .total-section {
+                justify-content: space-between;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 CollegeEats
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/cart">
+                🛒 Cart
+            </a>
+
+            <a href="/orders">
+                📦 My Orders
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <div class="page-title">
+
+            <h1>
+                📋 Order Details
+            </h1>
+
+            <p>
+                Here are the details of your order.
+            </p>
+
+        </div>
+
+
+        <!-- ORDER INFORMATION -->
+
+        <div class="order-info">
+
+            <div class="info-grid">
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Order ID
+                    </div>
+
+                    <div class="info-value">
+                        #{{ order.id }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Order Date
+                    </div>
+
+                    <div class="info-value">
+                        {{ order.order_date }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Order Status
+                    </div>
+
+                    <div>
+
+                        <span class="status">
+
+                            {% if order.status == "Pending" %}
+
+                                ⏳ Pending
+
+                            {% elif order.status == "Preparing" %}
+
+                                👨‍🍳 Preparing
+
+                            {% elif order.status == "Ready" %}
+
+                                ✅ Ready
+
+                            {% elif order.status == "Delivered" %}
+
+                                🚚 Delivered
+
+                            {% else %}
+
+                                {{ order.status }}
+
+                            {% endif %}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDERED ITEMS -->
+
+        <div class="items-card">
+
+            <h2>
+                🍔 Ordered Items
+            </h2>
+
+
+            {% for item in items %}
+
+                <div class="item">
+
+
+                    <div>
+
+                        <div class="food-name">
+                            {{ item.name }}
+                        </div>
+
+                        <div class="item-price">
+                            ₹{{ "%.2f"|format(item.price) }} per item
+                        </div>
+
+                    </div>
+
+
+                    <div class="quantity">
+
+                        Qty:
+                        {{ item.quantity }}
+
+                    </div>
+
+
+                    <div class="subtotal">
+
+                        ₹{{ "%.2f"|format(item.price * item.quantity) }}
+
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+
+
+            <!-- TOTAL -->
+
+            <div class="total-section">
+
+                <div class="total-label">
+                    Total Amount
+                </div>
+
+                <div class="total">
+                    ₹{{ "%.2f"|format(order.total_amount) }}
+                </div>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="buttons">
+
+                <a
+                    href="/orders"
+                    class="btn secondary-btn"
+                >
+                    ← My Orders
+                </a>
+
+                <a
+                    href="/"
+                    class="btn primary-btn"
+                >
+                    🍔 Order More Food
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 <strong>CollegeEats</strong>
+            | College Food Ordering System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Manage Orders - CollegeEats</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #333;
+        }
+
+        .navbar {
+            background: #ff5722;
+            color: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .back {
+            color: #ff5722;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* ORDER CARD */
+
+        .order-card {
+            background: white;
+            border: 1px solid #e7e7e7;
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .order-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-id {
+            font-size: 21px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .date {
+            color: #777;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .status {
+            padding: 7px 13px;
+            border-radius: 20px;
+            background: #fff3e0;
+            color: #e65100;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            padding: 20px 0;
+        }
+
+        .info-label {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .amount {
+            color: #ff5722;
+            font-size: 18px;
+        }
+
+        /* STATUS FORM */
+
+        .status-form {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .status-form label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        select {
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #ff5722;
+        }
+
+        .update-btn {
+            padding: 9px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #ff5722;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .update-btn:hover {
+            background: #e64a19;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            background: white;
+            padding: 55px 20px;
+            text-align: center;
+            border-radius: 12px;
+            border: 1px solid #e7e7e7;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .empty h2 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .empty p {
+            color: #777;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 45px;
+            background: #222;
+            color: #bbb;
+            text-align: center;
+            padding: 23px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .order-top {
+                flex-direction: column;
+            }
+
+            .order-info {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .status-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            select,
+            .update-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 CollegeEats
+        </div>
+
+        <a href="/admin">
+            Admin Dashboard
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+
+        <div class="page-header">
+
+            <h1>
+                📦 Manage Orders
+            </h1>
+
+            <a
+                href="/admin"
+                class="back"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        {% if orders %}
+
+
+            {% for order in orders %}
+
+                <div class="order-card">
+
+
+                    <div class="order-top">
+
+                        <div>
+
+                            <div class="order-id">
+                                Order #{{ order.id }}
+                            </div>
+
+                            <div class="date">
+                                {{ order.order_date }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="status">
+
+                            {% if order.status == "Pending" %}
+
+                                ⏳ Pending
+
+                            {% elif order.status == "Preparing" %}
+
+                                👨‍🍳 Preparing
+
+                            {% elif order.status == "Ready" %}
+
+                                ✅ Ready
+
+                            {% elif order.status == "Delivered" %}
+
+                                🚚 Delivered
+
+                            {% else %}
+
+                                {{ order.status }}
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="order-info">
+
+
+                        <div>
+
+                            <div class="info-label">
+                                STUDENT
+                            </div>
+
+                            <div class="info-value">
+                                {{ order.name }}
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="info-label">
+                                EMAIL
+                            </div>
+
+                            <div class="info-value">
+                                {{ order.email }}
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="info-label">
+                                TOTAL
+                            </div>
+
+                            <div class="info-value amount">
+                                ₹{{ order.total_amount }}
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <form
+                        action="/admin/orders/update/{{ order.id }}"
+                        method="POST"
+                        class="status-form"
+                    >
+
+                        <label for="status-{{ order.id }}">
+                            Update Status
+                        </label>
+
+
+                        <select
+                            id="status-{{ order.id }}"
+                            name="status"
+                        >
+
+                            <option
+                                value="Pending"
+                                {% if order.status == "Pending" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Pending
+                            </option>
+
+                            <option
+                                value="Preparing"
+                                {% if order.status == "Preparing" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Preparing
+                            </option>
+
+                            <option
+                                value="Ready"
+                                {% if order.status == "Ready" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Ready
+                            </option>
+
+                            <option
+                                value="Delivered"
+                                {% if order.status == "Delivered" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Delivered
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="submit"
+                            class="update-btn"
+                        >
+                            Update
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📦
+                </div>
+
+                <h2>
+                    No Orders Yet
+                </h2>
+
+                <p>
+                    Abhi tak kisi student ne order place nahi kiya.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 <strong>CollegeEats</strong>
+            | Admin Panel
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

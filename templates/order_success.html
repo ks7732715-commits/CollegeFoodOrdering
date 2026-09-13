@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Order Placed - CollegeEats</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: #ff5722;
+            color: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            margin: auto;
+            padding: 50px 0;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 14px;
+            padding: 45px 35px;
+            text-align: center;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .success-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        h1 {
+            color: #222;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            color: #777;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .order-number {
+            display: inline-block;
+            background: #fff4ef;
+            border: 1px solid #ffd8cc;
+            color: #e64a19;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .primary {
+            background: #ff5722;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #e64a19;
+        }
+
+        .secondary {
+            background: #eeeeee;
+            color: #333;
+        }
+
+        .secondary:hover {
+            background: #ddd;
+        }
+
+        footer {
+            margin-top: auto;
+            background: #222;
+            color: #bbb;
+            text-align: center;
+            padding: 23px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 5%;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                width: 92%;
+                padding: 30px 0;
+            }
+
+            .success-card {
+                padding: 35px 20px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 CollegeEats
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/orders">
+                📦 My Orders
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="container">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h1>
+                Order Placed Successfully!
+            </h1>
+
+            <p class="message">
+                Thank you for ordering from CollegeEats.
+                Your order has been received and will be prepared soon.
+            </p>
+
+            <div class="order-number">
+                Order #{{ order_id }}
+            </div>
+
+            <div class="buttons">
+
+                <a
+                    href="/orders"
+                    class="btn primary"
+                >
+                    📦 View My Orders
+                </a>
+
+                <a
+                    href="/"
+                    class="btn secondary"
+                >
+                    🍔 Order More Food
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 <strong>CollegeEats</strong>
+            | College Food Ordering System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

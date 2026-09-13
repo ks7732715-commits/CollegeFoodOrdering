@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - CollegeEats</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #ff5722;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title h1 {
+            font-size: 32px;
+            color: #222;
+        }
+
+        .page-title p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+        /* CHECKOUT LAYOUT */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        /* ORDER ITEMS */
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .food-name {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .quantity {
+            color: #777;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #ff5722;
+        }
+
+        /* SUMMARY */
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            color: #555;
+        }
+
+        .total-row {
+            border-top: 2px solid #eee;
+            padding-top: 18px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .total-price {
+            color: #ff5722;
+        }
+
+        /* PAYMENT */
+
+        .payment-box {
+            margin-top: 25px;
+            padding: 18px;
+            background: #fff7f3;
+            border-radius: 10px;
+            border: 1px solid #ffd8cc;
+        }
+
+        .payment-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .payment-box p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* BUTTON */
+
+        .place-order-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #ff5722;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .place-order-btn:hover {
+            background: #e64a19;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ff5722;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 50px;
+            background: #222;
+            color: #ccc;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 26px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 CollegeEats
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/cart">
+                🛒 Cart
+            </a>
+
+            <a href="/orders">
+                📦 My Orders
+            </a>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <div class="page-title">
+
+            <h1>
+                🧾 Checkout
+            </h1>
+
+            <p>
+                Review your order before placing it.
+            </p>
+
+        </div>
+
+
+        <div class="checkout-layout">
+
+
+            <!-- ORDER ITEMS -->
+
+            <div class="card">
+
+                <h2>
+                    🍔 Your Order
+                </h2>
+
+
+                {% if cart_items %}
+
+                    {% for item in cart_items %}
+
+                        <div class="order-item">
+
+                            <div>
+
+                                <div class="food-name">
+                                    {{ item.name }}
+                                </div>
+
+                                <div class="quantity">
+                                    Quantity: {{ item.quantity }}
+                                </div>
+
+                            </div>
+
+                            <div class="item-price">
+                                ₹{{ "%.2f"|format(item.subtotal) }}
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>
+                        Your cart is empty.
+                    </p>
+
+                {% endif %}
+
+
+                <a
+                    href="/cart"
+                    class="back-link"
+                >
+                    ← Back to Cart
+                </a>
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div class="card">
+
+                <h2>
+                    💳 Order Summary
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <span>
+                        {{ cart_items|length }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <span>
+                        ₹{{ "%.2f"|format(total) }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <span>
+                        FREE
+                    </span>
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span class="total-price">
+                        ₹{{ "%.2f"|format(total) }}
+                    </span>
+
+                </div>
+
+
+                <!-- PAYMENT -->
+
+                <div class="payment-box">
+
+                    <h3>
+                        💵 Payment Method
+                    </h3>
+
+                    <p>
+                        Cash / College Counter Payment
+                    </p>
+
+                </div>
+
+
+                <!-- PLACE ORDER -->
+
+                <form
+                    action="/place_order"
+                    method="POST"
+                >
+
+                    <button
+                        type="submit"
+                        class="place-order-btn"
+                    >
+                        ✅ Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 <strong>CollegeEats</strong>
+            | College Food Ordering System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

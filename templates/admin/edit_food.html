@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Food - CollegeEats</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f6f8;
+            color: #333;
+        }
+
+        .navbar {
+            background: #ff5722;
+            color: white;
+            padding: 16px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 700px;
+            margin: 40px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            color: #222;
+            font-size: 28px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 8px;
+            color: #ff5722;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e7e7e7;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #ff5722;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .checkbox-row input {
+            width: auto;
+        }
+
+        .checkbox-row label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .update-btn,
+        .cancel-btn {
+            flex: 1;
+            padding: 13px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .update-btn {
+            border: none;
+            background: #ff5722;
+            color: white;
+        }
+
+        .update-btn:hover {
+            background: #e64a19;
+        }
+
+        .cancel-btn {
+            background: #eeeeee;
+            color: #333;
+        }
+
+        .cancel-btn:hover {
+            background: #ddd;
+        }
+
+        footer {
+            margin-top: 45px;
+            background: #222;
+            color: #bbb;
+            text-align: center;
+            padding: 23px;
+        }
+
+        footer strong {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .container {
+                width: 92%;
+                margin: 30px auto;
+            }
+
+            .form-card {
+                padding: 22px;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🍔 CollegeEats
+        </div>
+
+        <a href="/admin">
+            Admin Dashboard
+        </a>
+
+    </nav>
+
+
+    <main class="container">
+
+
+        <div class="page-title">
+
+            <h1>
+                ✏️ Edit Food
+            </h1>
+
+            <a
+                href="/admin/food"
+                class="back"
+            >
+                ← Back to Food Management
+            </a>
+
+        </div>
+
+
+        <div class="form-card">
+
+            <form
+                action="/admin/food/edit/{{ food.id }}"
+                method="POST"
+            >
+
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Food Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value="{{ food.name }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        required
+                    >{{ food.description }}</textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Price (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        name="price"
+                        value="{{ food.price }}"
+                        min="1"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="category"
+                        name="category"
+                        value="{{ food.category }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="image">
+                        Image Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="image"
+                        name="image"
+                        value="{{ food.image or '' }}"
+                        placeholder="e.g. burger.jpg"
+                    >
+
+                </div>
+
+
+                <div class="checkbox-row">
+
+                    <input
+                        type="checkbox"
+                        id="available"
+                        name="available"
+                        {% if food.available %}checked{% endif %}
+                    >
+
+                    <label for="available">
+                        Food is currently available
+                    </label>
+
+                </div>
+
+
+                <div class="button-row">
+
+                    <button
+                        type="submit"
+                        class="update-btn"
+                    >
+                        Save Changes
+                    </button>
+
+                    <a
+                        href="/admin/food"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 <strong>CollegeEats</strong>
+            | Admin Panel
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

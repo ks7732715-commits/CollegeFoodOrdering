@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>My Orders</title>
+
+</head>
+
+<body>
+
+    <h1>📦 My Orders</h1>
+
+    <p>
+        <a href="/">← Back to Menu</a>
+    </p>
+
+    <hr>
+
+    {% if orders %}
+
+        {% for order in orders %}
+
+            <div>
+
+                <h2>
+                    Order #{{ order.id }}
+                </h2>
+
+                <p>
+                    Total Amount:
+                    <strong>₹{{ order.total_amount }}</strong>
+                </p>
+
+                <p>
+                    Status:
+                    <strong>{{ order.status }}</strong>
+                </p>
+
+                <p>
+                    Order Date:
+                    {{ order.order_date }}
+                </p>
+
+                <a href="/order/{{ order.id }}">
+                    <button>
+                        View Order Details
+                    </button>
+                </a>
+
+            </div>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h2>No orders found 😔</h2>
+
+        <p>
+            You have not placed any order yet.
+        </p>
+
+        <a href="/">
+            <button>Order Food 🍔</button>
+        </a>
+
+    {% endif %}
+
+</body>
+
+</html>
