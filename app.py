@@ -908,6 +908,12 @@ def update_order_status(order_id):
 
 if __name__ == "__main__":
 
-    app.run(
-        debug=True
+    from waitress import serve
+
+    port = int(os.getenv("PORT", "5000"))
+
+    serve(
+        app,
+        host="0.0.0.0",
+        port=port
     )
